@@ -1,32 +1,29 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+    <!-- 头部区域 -->
+    <Header></Header>
+
+    <!-- 路由视口 -->
+    <router-view></router-view>
+    <!-- 底部区域 this.$route.meta.show路由元信息的隐藏与显示 -->
+    <Footer v-show="this.$route.meta.show"></Footer>
   </div>
 </template>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import Header from '@/components/header/index.vue'
+import Footer from '@/components/footer/index.vue'
+export default {
+  components:{
+    Header,
+    Footer
+  },
+  created(){
+    this.$store.dispatch('getNavlist')
+  },
+
+
+
 }
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+</script>
+<style lang="less"></style>
